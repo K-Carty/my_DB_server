@@ -16,3 +16,5 @@ app.get('/get', (req,res) => {
 app.listen(port, () => { 
   console.log(`DB server app listening at http://localhost:${port}`)
 });
+
+module.exports = app
