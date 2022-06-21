@@ -1,5 +1,6 @@
 const app = require('./server') // Link to your server file
-const supertest = require('supertest')
+const supertest = require('supertest');
+const { header } = require('express/lib/request');
 const request = supertest(app)
 
 
@@ -7,9 +8,14 @@ const request = supertest(app)
   it('store the passed key and value in memory', async () => {
     let somevalue = 6
     const res = await request.get(`/set?somekey=${somevalue}`)
-    console.log(res)
     expect(res.status).toBe(200)
     expect(res.body.somevalue).toBe("6")
+  });
+
+  it('returns the value stored at somekey', async () => {
+    const res = await request.get(`/get?key=somekey`)
+    expect(res.status).toBe(200)
+    expect(res.text).toBe("6")
   });
 });
 
