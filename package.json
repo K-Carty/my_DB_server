@@ -11,9 +11,6 @@
     },
     "build": "esbuild index.js --bundle --platform=node --outfile=bundle.js --watch"
   },
-  "jest": {
-    "testURL": "http://localhost/4000"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",

@@ -1,14 +1,15 @@
-const app = require('./server.js')
- const fs = require('fs');
-const { doesNotMatch } = require('assert');
+const app = require('./server') // Link to your server file
+const supertest = require('supertest')
+const request = supertest(app)
 
- describe("DB Server", async () => {
-  it('store the passed key and value in memory', () => {
+
+ describe("DB Server", () => {
+  it('store the passed key and value in memory', async () => {
     let somevalue = 6
-    app.get(`/set?somekey=${somevalue}`)
-    
-    expect(document).toContain(somevalue)
-    done()
+    const res = await request.get(`/set?somekey=${somevalue}`)
+    console.log(res)
+    expect(res.status).toBe(200)
+    expect(res.body.somevalue).toBe("6")
   });
 });
 
